@@ -89,3 +89,6 @@ typings/
 
 # Distribution files
 dist
+
+# Environment variables
+.env.local

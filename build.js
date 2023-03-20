@@ -2,7 +2,7 @@ const { build } = require("esbuild");
 const { nodeExternalsPlugin } = require('esbuild-node-externals');
 
 build({
-  entryPoints: ["src/weatherAlert.ts"],
+  entryPoints: ["src/app.ts"],
   bundle: true,
   platform: "node",
   target: "node14",

@@ -1,0 +1,19 @@
+const OPENWEATHERMAP_API_KEY = process.env.OPENWEATHERMAP_API_KEY || "";
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || "";
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || "";
+const STRIPE_PROVIDER_TOKEN = process.env.STRIPE_PROVIDER_TOKEN || "";
+const CITY_NAME = process.env.CITY_NAME || "";
+const COUNTRY_CODE = process.env.COUNTRY_CODE || "";
+const TEMP_THRESHOLD = Number(process.env.TEMP_THRESHOLD) || 20;
+const WIND_THRESHOLD = Number(process.env.WIND_THRESHOLD) || 10;
+
+export const config = {
+  OPENWEATHERMAP_API_KEY,
+  TELEGRAM_BOT_TOKEN,
+  TELEGRAM_CHAT_ID,
+  STRIPE_PROVIDER_TOKEN,
+  CITY_NAME,
+  COUNTRY_CODE,
+  TEMP_THRESHOLD,
+  WIND_THRESHOLD,
+};

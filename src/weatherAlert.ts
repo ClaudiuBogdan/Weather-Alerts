@@ -1,5 +1,5 @@
 import logger from "./logger";
-import { getWeatherData, generateWeatherMessages } from "./weather";
+import { getDataAndGenerateMessages } from "./weather";
 import { createBot } from "./telegramBot";
 import { createInvoice } from "./payment";
 
@@ -24,13 +24,10 @@ export const createWeatherAlertBot = (
     const chatId = ctx.chat.id;
 
     try {
-      const weatherData = await getWeatherData(apiKey, cityName, countryCode);
-      const minTemp = weatherData.main.temp_min;
-      const windSpeed = weatherData.wind.speed;
-
-      const { tempMessage, windMessage } = generateWeatherMessages(
-        minTemp,
-        windSpeed,
+      const { tempMessage, windMessage } = await getDataAndGenerateMessages(
+        apiKey,
+        cityName,
+        countryCode,
         tempThreshold,
         windThreshold
       );
@@ -73,33 +70,3 @@ export const createWeatherAlertBot = (
 
   return bot;
 };
-
-const OPENWEATHERMAP_API_KEY = "your_openweathermap_api_key";
-const TELEGRAM_BOT_TOKEN = "your_telegram_bot_token";
-const STRIPE_PROVIDER_TOKEN = "your_stripe_provider_token";
-const CITY_NAME = "your_city_name";
-const COUNTRY_CODE = "your_country_code";
-const TEMP_THRESHOLD = 20;
-const WIND_THRESHOLD = 10;
-
-const bot = createWeatherAlertBot(
-  TELEGRAM_BOT_TOKEN,
-  OPENWEATHERMAP_API_KEY,
-  CITY_NAME,
-  COUNTRY_CODE,
-  TEMP_THRESHOLD,
-  WIND_THRESHOLD,
-  STRIPE_PROVIDER_TOKEN
-);
-
-bot.launch();
-
-logger.info("Weather Alert Bot started.");
-
-process.on("SIGINT", () => {
-  logger.info("Stopping Weather Alert Bot...");
-  bot.stop();
-  logger.info("Weather Alert Bot stopped.");
-
-  process.exit();
-});
